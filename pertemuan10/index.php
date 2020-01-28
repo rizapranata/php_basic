@@ -36,7 +36,7 @@
             <td><?= $row["jurusan"]; ?></td>
             <td>
                <a href="">ubah</a> |
-               <a href="">hapus</a>
+               <a href="hapus.php?id=<?= $row["id"]; ?>" onclick="return confirm('yakin?')">hapus</a>
             </td>
          </tr>
          <?php $i++; ?>
