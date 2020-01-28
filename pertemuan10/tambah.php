@@ -1,26 +1,23 @@
 <?php
-// koneksi ke database
-$conn = mysqli_connect("localhost","root","","phpbasic");
+require 'functions.php';
 // cek apakah tombol submit sudah di tekan?
 if (isset($_POST["submit"])) {
-    $nrp  = $_POST["nrp"];
-    $nama = $_POST["nama"];
-    $email = $_POST["email"];
-    $jurusan = $_POST["jurusan"];
-    $gambar = $_POST["gambar"];
-    
-    // query insert data
-    $query = "INSERT INTO siswa VALUES ('','$nrp','$nama','$email','$jurusan','$gambar')";
-
-    mysqli_query($conn, $query);
-    
     // cek apakah data berhasil di tambah atu tidak
-    if (mysqli_affected_rows( $conn) > 0) {
-        echo "berhasil";
-    } else {
-        echo "Gagal!\n";
-        echo mysqli_error($conn);
-    }
+   if (tambah($_POST) > 0) {
+        echo "
+            <script>
+                alert('data berhasil di tambahkan');
+                document.location.href = 'index.php';
+            </script>
+        ";
+   }else{
+        echo "
+        <script>
+            alert('data gagal di tambahkan');
+            document.location.href = 'index.php';
+        </script>
+    ";
+   }
 }
 ?>
 
@@ -38,7 +35,7 @@ if (isset($_POST["submit"])) {
         <ul>
             <li>
                 <label for="nrp">NRP</label>
-                <input type="text" name="nrp" id="nrp">
+                <input type="text" name="nrp" id="nrp" required>
             </li>
             <li>
                 <label for="nama">Nama</label>
@@ -46,15 +43,15 @@ if (isset($_POST["submit"])) {
             </li>
             <li>
                 <label for="email">Email</label>
-                <input type="text" name="email" id="email">
+                <input type="text" name="email" id="email" required>
             </li>
             <li>
                 <label for="jurusan">Jurusan</label>
-                <input type="text" name="jurusan" id="jurusan">
+                <input type="text" name="jurusan" id="jurusan" required>
             </li>
             <li>
                 <label for="gambar">Gambar</label>
-                <input type="text" name="gambar" id="gambar">
+                <input type="text" name="gambar" id="gambar" required>
             </li>
             <li>
                 <button type="submit" name="submit">Tambah Data</button>
